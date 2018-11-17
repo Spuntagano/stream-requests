@@ -1,0 +1,48 @@
+@import '../../sass/global';
+
+.config-page {
+  color: $dark-text;
+
+  .notification-box {
+    .notification-box-url {
+      float: left;
+      width: 600px;
+      margin-right: 25px;
+    }
+
+    .copy-notification-box-url{
+      float: left;
+      margin-top: 18px;
+      cursor: pointer;
+
+      i {
+        position: relative;
+        top: 7px;
+      }
+    }
+
+    .btn {
+      float: right;
+      margin-top: 10px;
+    }
+  }
+
+  .notifications {
+    .label {
+      min-width: 120px;
+      margin-bottom: 15px;
+    }
+
+    margin-bottom: 1rem;
+  }
+
+  .dark-theme {
+    color: $light-text;
+  }
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}

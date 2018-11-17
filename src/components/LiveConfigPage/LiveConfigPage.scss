@@ -1,0 +1,29 @@
+@import '../../sass/global';
+
+.live-config-page {
+  color: $dark-text;
+
+  .background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -10;
+  }
+
+  .dark-theme {
+    color: $light-text;
+
+    .background {
+      background-color: $dark-background;
+      border: 1px solid #aaa;
+    }
+  }
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}

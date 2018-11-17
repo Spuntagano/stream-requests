@@ -1,0 +1,23 @@
+//$primary-color: color("red", "lighten-2") !default;
+//$primary-color-light: lighten($primary-color, 15%) !default;
+//$primary-color-dark: darken($primary-color, 15%) !default;
+
+$secondary-color: color("light-blue", "accent-4") !default;
+$link-color: $secondary-color !default;
+
+$card-bg-color: transparent !default;
+$card-link-color: $secondary-color !default;
+
+$h1-fontsize: 3rem !default;
+$h2-fontsize: 2rem !default;
+
+$button-disabled-background: #aaa !default;
+
+$collapsible-header-color: transparent !default;
+$collapsible-border-color: #bbb !default;
+
+$switch-unchecked-lever-bg: #aaa !default;
+
+$collection-bg-color: transparent !default;
+$collection-border-color: #aaa !default;
+$collection-hover-bg-color: $secondary-color !default;

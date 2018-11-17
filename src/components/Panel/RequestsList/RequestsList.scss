@@ -1,0 +1,97 @@
+@import '../../../sass/global';
+
+.requests-list {
+
+  a {
+    cursor: pointer;
+  }
+
+  .collection {
+    margin: 0;
+
+    .collection-item {
+      color: $dark-text;
+
+      .primary-content {
+        width: calc(100% - 75px);
+        float: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .secondary-content {
+        width: 75px;
+        text-align: right;
+        float: right;
+      }
+
+      &:hover {
+        color: $light-text;
+
+        .secondary-content {
+          color: $light-text;
+        }
+      }
+    }
+  }
+
+  .request-container {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    top: 0;
+
+    .card {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      top: 0;
+      margin: 0;
+      overflow-y: auto;
+
+      .card-content {
+        .card-title {
+          margin-bottom: 0;
+        }
+
+        .card-sub-title {
+          margin-bottom: 8px;
+          display: block;
+        }
+
+        .card-close {
+          float: right;
+          cursor: pointer;
+          color: lighten(gray, 10%);
+          transition: color ease-in-out 0.15s;
+
+          &:hover {
+            color: darken(gray, 10%);
+          }
+        }
+      }
+
+      .card-action {
+        line-height: 2.5;
+
+        .show-bits-balance {
+          margin-right: 0!important;
+        }
+      }
+    }
+  }
+}
+
+.dark-theme {
+  .requests-list {
+    .collection {
+
+      .collection-item {
+        color: $light-text;
+      }
+    }
+  }
+}

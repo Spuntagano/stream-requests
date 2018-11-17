@@ -1,0 +1,38 @@
+@import '../../../sass/global';
+
+.requests-form {
+  margin: 8px;
+
+  .request-form {
+    margin-bottom: 45px;
+    width: calc(100% - 5rem);
+  }
+
+  .delete-request {
+    margin: 4.8rem 0 0 1.3rem;
+  }
+}
+
+.dark-theme {
+  .requests-form {
+    .request-form {
+      input, textarea {
+        color: $light-text;
+      }
+
+      label {
+        color: $sub-light-text;
+      }
+    }
+  }
+
+  .notification-box, .notifications {
+    input, textarea {
+      color: $light-text;
+    }
+
+    label {
+      color: $sub-light-text;
+    }
+  }
+}

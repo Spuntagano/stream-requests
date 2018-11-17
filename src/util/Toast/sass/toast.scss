@@ -1,0 +1,18 @@
+#toast-container {
+  top: 0!important;
+  right: 0!important;
+  left: initial!important;
+  bottom: initial!important;
+
+  .material-icons {
+    margin-right: 10px;
+  }
+
+  .success {
+    background-color: #4caf50;
+  }
+
+  .error {
+    background-color: #f44336;
+  }
+}
