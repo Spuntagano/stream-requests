@@ -1,7 +1,7 @@
 @import '../../sass/global';
 
 .live-config-page {
-  color: $dark-text;
+  color: $dark-border-color;
 
   .background {
     position: absolute;
@@ -10,6 +10,7 @@
     bottom: 0;
     left: 0;
     z-index: -10;
+    background-color: #fff;
   }
 
   .dark-theme {
@@ -17,8 +18,23 @@
 
     .background {
       background-color: $dark-background;
-      border: 1px solid #aaa;
+      border: 1px solid $dark-border-color;
     }
+  }
+}
+
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  .loading-sign {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 

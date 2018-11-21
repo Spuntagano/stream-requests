@@ -28,13 +28,17 @@ export default class RequestsReceived extends React.Component {
     }
 
     render() {
-        const {theme} = this.props;
+        const {theme, requestsReceived} = this.props;
 
         return (
             <div className="requests-received">
                 <div className={theme === 'light' ? 'requests-received-light' : 'requests-received-dark'}>
                     <div className="collection with-header">
-                        <div className="collection-header"><h4>Request received</h4></div>
+                        <div className="collection-header">
+                            Stream Requests
+                            <div className="open-warning">Keep this window for notifications to show</div>
+                        </div>
+                        {!requestsReceived.length && <div className="collection-item center-align">Incoming requests will appear here</div>}
                         {this.renderRequestsReceived()}
                     </div>
                 </div>

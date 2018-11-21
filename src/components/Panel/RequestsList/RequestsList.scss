@@ -8,9 +8,31 @@
 
   .collection {
     margin: 0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+
+    .collection-header {
+        text-align: center;
+        color: $dark-text;
+        font-size: 20px;
+
+        i {
+          position: absolute;
+          top: 14px;
+          right: 18px;
+          cursor: pointer;
+        }
+
+        .choose-request {
+          font-size: 12px;
+          text-transform: none;
+        }
+      }
 
     .collection-item {
       color: $dark-text;
+      padding-left: 20px!important;
 
       .primary-content {
         width: calc(100% - 75px);
@@ -27,10 +49,11 @@
       }
 
       &:hover {
-        color: $light-text;
+        color: $hover-text-color;
+        border-color: $secondary-color;
 
         .secondary-content {
-          color: $light-text;
+          color: $hover-text-color;
         }
       }
     }
@@ -60,6 +83,7 @@
         .card-sub-title {
           margin-bottom: 8px;
           display: block;
+          color: $secondary-color;
         }
 
         .card-close {
@@ -89,8 +113,20 @@
   .requests-list {
     .collection {
 
+      border-color: $dark-border-color;
+
+      .collection-header {
+        border-color: $dark-border-color;
+        color: $light-text;
+      }
+
       .collection-item {
         color: $light-text;
+        border-color: $dark-border-color;
+
+        &:hover {
+          color: $hover-text-color;
+        }
       }
     }
   }

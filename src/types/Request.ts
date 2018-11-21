@@ -1,5 +1,5 @@
 type Request = {
-    [s: string]: string;
+    [s: string]: any,
 }
 
 export default Request;

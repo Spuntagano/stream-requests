@@ -30,6 +30,7 @@ export default class ConfigPage extends React.Component {
     public twitch: any;
     public onUpdateConfiguration: () => (e: MouseEvent<HTMLButtonElement>) => void;
     public onUpdateNotifications: (update: string) => (e: ChangeEvent<HTMLInputElement>) => void;
+    public onToggleActive: (index: number, price: string) => (e: ChangeEvent<HTMLInputElement>) => void;
     public onRequestChange: (index: number, price: string, update: string) => (e: ChangeEvent<HTMLInputElement>|ChangeEvent<HTMLTextAreaElement>) => void;
     public onDeleteRequest: (index: number, price: string) => (e: MouseEvent<HTMLButtonElement>) => void;
     public onTestNotifier: () => (e: MouseEvent<HTMLButtonElement>) => void;
@@ -68,6 +69,7 @@ export default class ConfigPage extends React.Component {
 
         this.onUpdateConfiguration = () => () => this.updateConfiguration();
         this.onUpdateNotifications = (update: string) => (e: ChangeEvent<HTMLInputElement>) => this.updateNotifications(e, update);
+        this.onToggleActive = (index: number, price: string) => (e: ChangeEvent<HTMLInputElement>) => this.toggleActive(e, index, price);
         this.onRequestChange = (index: number, price: string, update: string) => (e: ChangeEvent<HTMLInputElement>) => this.requestChange(e, index, price, update);
         this.onDeleteRequest = (index: number, price: string) => (e: MouseEvent<HTMLButtonElement>) => this.deleteRequest(e, index, price);
         this.onTestNotifier = () => () => this.testNotifier();
@@ -112,7 +114,7 @@ export default class ConfigPage extends React.Component {
                             }
 
                             if (requests[price].length < products[price].length) {
-                                requests[price].push({title: '', description: ''})
+                                requests[price].push({title: '', description: '', active: false})
                             }
                         });
 
@@ -158,8 +160,21 @@ export default class ConfigPage extends React.Component {
         this.setState((prevState: State) => {
             let newRequests: Requests = Object.assign({}, prevState.requests);
             if (newRequests[price][newRequests[price].length-1][update].length && prevState.requests[price].length < prevState.products[price].length) {
-                newRequests[price].push({title: '', description: ''});
+                newRequests[price].push({title: '', description: '', active: false});
             }
+
+            if (!newRequests[price][index].description.length && !newRequests[price][index].title.length && value.length) {
+                newRequests[price][index].active = true;
+            }
+
+            if (update === 'title' && !newRequests[price][index].description.length && !value.length) {
+                newRequests[price][index].active = false;
+            }
+
+            if (update === 'description' && !newRequests[price][index].title.length && !value.length) {
+                newRequests[price][index].active = false;
+            }
+
             newRequests[price][index][update] = value;
             return {requests: newRequests};
         });
@@ -193,7 +208,7 @@ export default class ConfigPage extends React.Component {
             newNotifications[update] = target.checked;
 
             return {notifications: newNotifications};
-        })
+        });
     }
 
     deleteRequest(e: MouseEvent<HTMLButtonElement>, index: number, price: string) {
@@ -201,7 +216,7 @@ export default class ConfigPage extends React.Component {
             let newRequests: Requests = Object.assign({}, prevState.requests);
 
             if (newRequests[price].length-1 === index) {
-                newRequests[price][index] = {title: '', description: ''};
+                newRequests[price][index] = {title: '', description: '', active: false};
             } else {
                 newRequests[price].splice(index, 1);
             }
@@ -214,7 +229,8 @@ export default class ConfigPage extends React.Component {
         let requestReceived: RequestReceived = {
             request: {
                 title: 'test request',
-                    description: 'request description'
+                description: 'request description',
+                active: true
             },
             transaction: {
                 displayName: "bits user",
@@ -250,6 +266,15 @@ export default class ConfigPage extends React.Component {
         this.toast.show({html: '<i class="material-icons">done</i>Notification URL copied!', classes: 'success'});
     }
 
+    toggleActive(e: ChangeEvent<HTMLInputElement>, index: number, price: string) {
+        let target = e.target;
+        this.setState((prevState: State) => {
+            let newRequests: Requests = Object.assign({}, prevState.requests);
+            newRequests[price][index].active = target.checked;
+            return {requests: newRequests};
+        });
+    }
+
     render() {
         if (this.state.configured && this.state.authorized) {
             return (
@@ -261,6 +286,7 @@ export default class ConfigPage extends React.Component {
                             products={this.state.products}
                             onRequestChange={this.onRequestChange}
                             onDeleteRequest={this.onDeleteRequest}
+                            onToggleActive={this.onToggleActive}
                         />
 
                         <h2>Notifications settings</h2>
@@ -320,7 +346,21 @@ export default class ConfigPage extends React.Component {
         } else {
             return (
                 <div className="loading">
-                    Loading...
+                    <div className="loading-sign">
+                        <div className="preloader-wrapper big active">
+                            <div className="spinner-layer spinner-blue-only">
+                                <div className="circle-clipper left">
+                                    <div className="circle" />
+                                </div>
+                                <div className="gap-patch">
+                                    <div className="circle" />
+                                </div>
+                                <div className="circle-clipper right">
+                                    <div className="circle" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             )
         }

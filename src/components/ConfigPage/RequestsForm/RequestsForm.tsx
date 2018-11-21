@@ -10,6 +10,7 @@ type Props = {
     products: Products,
     onRequestChange: (index: number, price: string, update: string) => (e: ChangeEvent<HTMLInputElement>|ChangeEvent<HTMLTextAreaElement>) => void;
     onDeleteRequest: (index: number, price: string) => (e: MouseEvent<HTMLButtonElement>) => void;
+    onToggleActive: (index: number, price: string) => (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default class RequestsForm extends React.Component {
@@ -54,7 +55,7 @@ export default class RequestsForm extends React.Component {
     }
 
     renderRequestsForm(price: string) {
-        const {requests, onRequestChange, onDeleteRequest} = this.props;
+        const {requests, onRequestChange, onDeleteRequest, onToggleActive} = this.props;
 
         return requests[price].map((request: Request, index: number) => {
             return <div key={`request-form-${price}-${index}`} className="clearfix">
@@ -71,6 +72,17 @@ export default class RequestsForm extends React.Component {
                 <button disabled={requests[price].length-1 === index && !request.title.length && !request.description.length} className="btn waves-effect waves-light delete-request btn-floating left" onClick={onDeleteRequest(index, price)}>
                     <i className="material-icons">close</i>
                 </button>
+                <div className="clearfix disable-switch">
+                    <div className="left label">Active</div>
+                    <div className="switch left">
+                        <label>
+                            Off
+                            <input type="checkbox" checked={request.active} onChange={onToggleActive(index, price)} />
+                            <span className="lever" />
+                            On
+                        </label>
+                    </div>
+                </div>
             </div>;
         });
     }

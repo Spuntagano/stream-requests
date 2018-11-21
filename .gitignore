@@ -66,4 +66,5 @@ typings/
 
 # Finalized files
 dist/
-"node_modules" 
+"node_modules"
+.idea

@@ -72,7 +72,6 @@ export default class PanelPage extends React.Component {
     componentDidMount() {
         if (this.twitch) {
             this.twitch.onAuthorized((auth: Auth) => {
-                console.log(auth.token);
                 this.authentication.setToken(auth.token, auth.userId, auth.channelId, auth.clientId);
 
                 this.setState(() => {
@@ -160,7 +159,21 @@ export default class PanelPage extends React.Component {
         } else {
             return (
                 <div className="loading">
-                    Loading...
+                    <div className="loading-sign">
+                        <div className="preloader-wrapper big active">
+                            <div className="spinner-layer spinner-blue-only">
+                                <div className="circle-clipper left">
+                                    <div className="circle" />
+                                </div>
+                                <div className="gap-patch">
+                                    <div className="circle" />
+                                </div>
+                                <div className="circle-clipper right">
+                                    <div className="circle" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             )
         }

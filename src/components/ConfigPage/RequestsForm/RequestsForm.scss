@@ -4,17 +4,37 @@
   margin: 8px;
 
   .request-form {
-    margin-bottom: 45px;
     width: calc(100% - 5rem);
   }
 
   .delete-request {
     margin: 4.8rem 0 0 1.3rem;
   }
+
+  .disable-switch {
+    margin-bottom: 45px;
+
+    .label {
+      margin-right: 15px;
+    }
+  }
 }
 
 .dark-theme {
   .requests-form {
+
+    .collapsible {
+      border-color: $dark-border-color;
+
+      .collapsible-header {
+        border-color: $dark-border-color;
+      }
+
+      .collapsible-body {
+        border-color: $dark-border-color;
+      }
+    }
+
     .request-form {
       input, textarea {
         color: $light-text;

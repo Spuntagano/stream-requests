@@ -24,6 +24,8 @@ export default class RequestsList extends React.Component {
     public onPurchaseRequest: (sku: string) => (e: MouseEvent<HTMLAnchorElement>) => void;
     public onShowRequest: (price: string, index: number) => (e: MouseEvent<HTMLAnchorElement>) => void;
     public onShowRequests: () => () => void;
+    public tooltip: any;
+
 
     constructor(props: Props) {
         super(props);
@@ -34,6 +36,8 @@ export default class RequestsList extends React.Component {
         this.onPurchaseRequest = (sku: string) => (e: MouseEvent<HTMLAnchorElement>) => this.purchaseRequest(e, sku);
         this.onShowRequest = (price: string, index: number) => (e: MouseEvent<HTMLAnchorElement>) => this.showRequest(e, price, index);
         this.onShowRequests = () => () => this.showRequests();
+        // @ts-ignore
+        this.tooltip = M.Tooltip;
 
         this.state = {
             price: null,
@@ -42,18 +46,24 @@ export default class RequestsList extends React.Component {
         }
     }
 
+    componentDidMount() {
+        this.tooltip.init(document.querySelectorAll('.tooltipped'));
+    }
+
     renderRequests() {
         const {requests, products} = this.props;
 
         return Object.keys(products).map((price) => {
             if (requests[price]) {
                 return requests[price].map((request: Request, index: number) => {
-                    return <a key={`request-${price}-${index}`} className="collection-item" onClick={this.onShowRequest(price, index)}>
-                        <div className="clearfix">
-                            <div className="primary-content">{request.title}</div>
-                            <div className="secondary-content">{price} bits</div>
-                        </div>
-                    </a>
+                    if (request.active) {
+                        return <a key={`request-${price}-${index}`} className="collection-item" onClick={this.onShowRequest(price, index)}>
+                            <div className="clearfix">
+                                <div className="primary-content">{request.title}</div>
+                                <div className="secondary-content">{price} bits</div>
+                            </div>
+                        </a>
+                    }
                 });
             }
         });
@@ -109,15 +119,28 @@ export default class RequestsList extends React.Component {
     }
 
     render() {
-        const {theme} = this.props;
+        const {theme, requests} = this.props;
+
+        let count = 0;
+        Object.keys(requests).map((price) => {
+            if (requests[price]) {
+                requests[price].map((request) => {
+                    if (request.active) {
+                        count++;
+                    }
+                })
+            }
+        });
 
         return (
             <div className="requests-list">
                 <div className={theme === 'light' ? 'requests-list-light' : 'requests-list-dark'}>
                     <div className={`collection with-header ${this.state.showInfo ? 'hide' : ''}`}>
                         <div className="collection-header">
-                            <h4>Choose request</h4>
+                            Stream Requests
+                            <i className="material-icons right tooltipped" data-name="bottom" data-tooltip="Stream request is a new way to interact with the streamer. It allows viewers to exchange bits for requests listed below.">info_outline</i>
                         </div>
+                        {!count && <div className="collection-item center-align">The broadcaster has no active requests for now</div>}
                         {this.renderRequests()}
                     </div>
                     <div className={`request-container scale-transition ${this.state.showInfo ? 'scale-in' : 'scale-out'}`}>

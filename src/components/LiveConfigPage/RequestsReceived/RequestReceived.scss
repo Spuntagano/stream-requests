@@ -3,8 +3,24 @@
 .requests-received {
   .collection {
     margin: 0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+
+    .collection-header {
+      text-align: center;
+      color: $dark-text;
+      font-size: 20px;
+
+      .open-warning {
+        font-size: 12px;
+      }
+    }
 
     .collection-item {
+      color: $dark-text;
+      padding-left: 20px!important;
+
       .primary-content {
         width: calc(100% - 75px);
         float: left;
@@ -14,6 +30,25 @@
         width: 75px;
         text-align: right;
         float: right;
+      }
+    }
+  }
+}
+
+.dark-theme {
+  .requests-received {
+    .collection {
+
+      border-color: $dark-border-color;
+
+      .collection-header {
+        border-color: $dark-border-color;
+        color: $light-text;
+      }
+
+      .collection-item {
+        color: $light-text;
+        border-color: $dark-border-color;
       }
     }
   }

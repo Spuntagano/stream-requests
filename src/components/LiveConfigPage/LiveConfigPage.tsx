@@ -106,7 +106,6 @@ export default class LiveConfigPage extends React.Component {
             });
 
             this.twitch.configuration.onChanged(() => {
-                console.log(this.twitch);
                 if (!this.state.configured) {
                     try {
                         let requests: Requests = (this.twitch.configuration.broadcaster.content) ? JSON.parse(this.twitch.configuration.broadcaster.content).requests : {};
@@ -140,7 +139,7 @@ export default class LiveConfigPage extends React.Component {
             });
 
             this.twitch.onContext((context: Context, delta: Array<string>) => {
-                this.contextUpdate(context, delta)
+                this.contextUpdate(context, delta);
             });
 
             this.twitch.onError(() => {
@@ -207,7 +206,21 @@ export default class LiveConfigPage extends React.Component {
         } else {
             return (
                 <div className="loading">
-                    Loading...
+                    <div className="loading-sign">
+                        <div className="preloader-wrapper big active">
+                            <div className="spinner-layer spinner-blue-only">
+                                <div className="circle-clipper left">
+                                    <div className="circle" />
+                                </div>
+                                <div className="gap-patch">
+                                    <div className="circle" />
+                                </div>
+                                <div className="circle-clipper right">
+                                    <div className="circle" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             )
         }

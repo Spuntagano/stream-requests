@@ -1,5 +1,5 @@
 type Notifications = {
-    [s: string]: boolean
+    [s: string]: boolean,
 }
 
 export default Notifications;
