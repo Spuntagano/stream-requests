@@ -114,7 +114,7 @@ export default class LiveConfigPage extends React.Component {
                         let configs: Configs = (this.twitch.configuration.global.content) ? JSON.parse(this.twitch.configuration.global.content).configs : {};
                         if (this.twitch.configuration.developer.content) {
                             products = (this.twitch.configuration.developer.content) ? JSON.parse(this.twitch.configuration.developer.content).products : {};
-                            configs = (this.twitch.configuration.global.content) ? JSON.parse(this.twitch.configuration.global.content).configs : {};
+                            configs = (this.twitch.configuration.developer.content) ? JSON.parse(this.twitch.configuration.developer.content).configs : {};
                         }
 
                         Object.keys(this.state.notifications).forEach((key: string) => {
