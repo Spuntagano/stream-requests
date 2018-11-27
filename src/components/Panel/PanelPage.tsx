@@ -9,6 +9,7 @@ import Toast from '../../util/Toast/Toast';
 import Configs from '../../types/Configs';
 import * as jwt from "jsonwebtoken";
 import './PanelPage.scss';
+import Notifications from "../../types/Notifications";
 
 type State = {
     configured: boolean,
@@ -72,6 +73,7 @@ export default class PanelPage extends React.Component {
     componentDidMount() {
         if (this.twitch) {
             this.twitch.onAuthorized((auth: Auth) => {
+                console.log(auth);
                 this.authentication.setToken(auth.token, auth.userId, auth.channelId, auth.clientId);
 
                 this.setState(() => {
@@ -104,12 +106,12 @@ export default class PanelPage extends React.Component {
             this.twitch.configuration.onChanged(() => {
                 if (!this.state.configured) {
                     try {
-                        let requests: Requests = (this.twitch.configuration.broadcaster.content) ? JSON.parse(this.twitch.configuration.broadcaster.content).requests : {};
-                        let products: Products = (this.twitch.configuration.global.content) ? JSON.parse(this.twitch.configuration.global.content).products : {};
-                        let configs: Configs = (this.twitch.configuration.global.content) ? JSON.parse(this.twitch.configuration.global.content).configs : {};
-                        if (this.twitch.configuration.developer.content) {
-                            products = (this.twitch.configuration.developer.content) ? JSON.parse(this.twitch.configuration.developer.content).products : {};
-                            configs = (this.twitch.configuration.developer.content) ? JSON.parse(this.twitch.configuration.developer.content).configs : {};
+                        let requests: Requests = (this.twitch.configuration.broadcaster && this.twitch.configuration.broadcaster.content) ? JSON.parse(this.twitch.configuration.broadcaster.content).requests : {};
+                        let products: Products = (this.twitch.configuration.global && this.twitch.configuration.global.content) ? JSON.parse(this.twitch.configuration.global.content).products : {};
+                        let configs: Configs = (this.twitch.configuration.global && this.twitch.configuration.global.content) ? JSON.parse(this.twitch.configuration.global.content).configs : {};
+                        if (this.twitch.configuration.developer && this.twitch.configuration.developer.content) {
+                            products = JSON.parse(this.twitch.configuration.developer.content).products;
+                            configs = JSON.parse(this.twitch.configuration.developer.content).configs;
                         }
 
                         this.setState(() => {
@@ -121,7 +123,7 @@ export default class PanelPage extends React.Component {
                             }
                         });
                     } catch (e) {
-                        throw new Error('Invalid configurations');
+                        this.toast.show({html: '<i class="material-icons">error_outline</i>Invalid configuration', classes: 'error'});
                     }
                 }
             });

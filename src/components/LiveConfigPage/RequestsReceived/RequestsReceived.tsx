@@ -9,9 +9,17 @@ type Props = {
 
 export default class RequestsReceived extends React.Component {
     public props: Props;
+    public tooltip: any;
 
     constructor(props: Props) {
         super(props);
+
+        // @ts-ignore
+        this.tooltip = M.Tooltip;
+    }
+
+    componentDidMount() {
+        this.tooltip.init(document.querySelectorAll('.tooltipped'));
     }
 
     renderRequestsReceived() {
@@ -36,7 +44,7 @@ export default class RequestsReceived extends React.Component {
                     <div className="collection with-header">
                         <div className="collection-header">
                             Stream Requests
-                            <div className="open-warning">Keep this window for notifications to show</div>
+                            <i className="material-icons right tooltipped" data-name="bottom" data-tooltip="Keep this window open for notifications to show.">info_outline</i>
                         </div>
                         {!requestsReceived.length && <div className="collection-item center-align">Incoming requests will appear here</div>}
                         {this.renderRequestsReceived()}

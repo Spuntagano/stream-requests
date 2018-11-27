@@ -29,7 +29,7 @@ module.exports = (_env, argv) => {
 
   // edit webpack plugins here!
   let plugins = [
-    new webpack.HotModuleReplacementPlugin()
+    // new webpack.HotModuleReplacementPlugin()
   ];
 
   for (name in entryPoints) {

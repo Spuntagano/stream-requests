@@ -135,13 +135,15 @@ export default class RequestsList extends React.Component {
         return (
             <div className="requests-list">
                 <div className={theme === 'light' ? 'requests-list-light' : 'requests-list-dark'}>
-                    <div className={`collection with-header ${this.state.showInfo ? 'hide' : ''}`}>
+                    <div className={`collection with-header ${this.state.showInfo ? '' : ''}`}>
                         <div className="collection-header">
                             Stream Requests
                             <i className="material-icons right tooltipped" data-name="bottom" data-tooltip="Stream request is a new way to interact with the streamer. It allows viewers to exchange bits for requests listed below.">info_outline</i>
                         </div>
-                        {!count && <div className="collection-item center-align">The broadcaster has no active requests for now</div>}
-                        {this.renderRequests()}
+                        <div className={this.state.showInfo ? 'hide' : ''}>
+                            {!count && <div className="collection-item center-align no-item">The broadcaster has no active requests for now</div>}
+                            {this.renderRequests()}
+                        </div>
                     </div>
                     <div className={`request-container scale-transition ${this.state.showInfo ? 'scale-in' : 'scale-out'}`}>
                         {this.state.showInfo && this.renderRequest()}

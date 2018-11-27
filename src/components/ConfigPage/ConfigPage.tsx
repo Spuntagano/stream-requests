@@ -99,13 +99,13 @@ export default class ConfigPage extends React.Component {
             this.twitch.configuration.onChanged(() => {
                 if (!this.state.configured) {
                     try {
-                        let requests: Requests = (this.twitch.configuration.broadcaster.content) ? JSON.parse(this.twitch.configuration.broadcaster.content).requests : {};
-                        let notifications: Notifications = (this.twitch.configuration.broadcaster.content) ? JSON.parse(this.twitch.configuration.broadcaster.content).notifications : {};
-                        let products: Products = (this.twitch.configuration.global.content) ? JSON.parse(this.twitch.configuration.global.content).products : {};
-                        let configs: Configs = (this.twitch.configuration.global.content) ? JSON.parse(this.twitch.configuration.global.content).configs : {};
-                        if (this.twitch.configuration.developer.content) {
-                            products = (this.twitch.configuration.developer.content) ? JSON.parse(this.twitch.configuration.developer.content).products : {};
-                            configs = (this.twitch.configuration.developer.content) ? JSON.parse(this.twitch.configuration.developer.content).configs : {};
+                        let requests: Requests = (this.twitch.configuration.broadcaster && this.twitch.configuration.broadcaster.content) ? JSON.parse(this.twitch.configuration.broadcaster.content).requests : {};
+                        let notifications: Notifications = (this.twitch.configuration.broadcaster && this.twitch.configuration.broadcaster.content) ? JSON.parse(this.twitch.configuration.broadcaster.content).notifications : {};
+                        let products: Products = (this.twitch.configuration.global && this.twitch.configuration.global.content) ? JSON.parse(this.twitch.configuration.global.content).products : {};
+                        let configs: Configs = (this.twitch.configuration.global && this.twitch.configuration.global.content) ? JSON.parse(this.twitch.configuration.global.content).configs : {};
+                        if (this.twitch.configuration.developer && this.twitch.configuration.developer.content) {
+                            products = JSON.parse(this.twitch.configuration.developer.content).products;
+                            configs = JSON.parse(this.twitch.configuration.developer.content).configs;
                         }
 
                         Object.keys(products).forEach((price) => {
@@ -134,7 +134,7 @@ export default class ConfigPage extends React.Component {
                             }
                         });
                     } catch (e) {
-                        throw new Error('Invalid configurations');
+                        this.toast.show({html: '<i class="material-icons">error_outline</i>Invalid configuration', classes: 'error'});
                     }
                 }
             });

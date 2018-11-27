@@ -13,13 +13,14 @@
     border-right: none;
 
     .collection-header {
-        text-align: center;
-        color: $dark-text;
-        font-size: 20px;
+        color: #fff;
+        font-size: 18px;
+        background-color: $secondary-color!important;
+        border-bottom: none!important;
 
         i {
           position: absolute;
-          top: 14px;
+          top: 12px;
           right: 18px;
           cursor: pointer;
         }
@@ -49,11 +50,13 @@
       }
 
       &:hover {
-        color: $hover-text-color;
-        border-color: $secondary-color;
-
-        .secondary-content {
+        &:not(.no-item) {
           color: $hover-text-color;
+          border-color: $secondary-color;
+
+          .secondary-content {
+            color: $hover-text-color;
+          }
         }
       }
     }
@@ -64,7 +67,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    top: 0;
+    top: 37px;
 
     .card {
       position: absolute;
@@ -117,7 +120,6 @@
 
       .collection-header {
         border-color: $dark-border-color;
-        color: $light-text;
       }
 
       .collection-item {
@@ -125,7 +127,9 @@
         border-color: $dark-border-color;
 
         &:hover {
-          color: $hover-text-color;
+          &:not(.no-item) {
+            color: $hover-text-color;
+          }
         }
       }
     }
