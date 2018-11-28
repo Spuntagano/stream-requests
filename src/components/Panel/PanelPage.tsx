@@ -73,7 +73,6 @@ export default class PanelPage extends React.Component {
     componentDidMount() {
         if (this.twitch) {
             this.twitch.onAuthorized((auth: Auth) => {
-                console.log(auth);
                 this.authentication.setToken(auth.token, auth.userId, auth.channelId, auth.clientId);
 
                 this.setState(() => {

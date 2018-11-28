@@ -119,10 +119,10 @@ export default class RequestsList extends React.Component {
     }
 
     render() {
-        const {theme, requests} = this.props;
+        const {theme, requests, products} = this.props;
 
         let count = 0;
-        Object.keys(requests).map((price) => {
+        Object.keys(products).map((price) => {
             if (requests[price]) {
                 requests[price].map((request) => {
                     if (request.active) {
