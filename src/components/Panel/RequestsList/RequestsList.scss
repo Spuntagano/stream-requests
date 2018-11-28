@@ -67,7 +67,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    top: 37px;
+    top: 47px;
 
     .card {
       position: absolute;
@@ -79,6 +79,8 @@
       overflow-y: auto;
 
       .card-content {
+        padding-top: 16px;
+
         .card-title {
           margin-bottom: 0;
         }
