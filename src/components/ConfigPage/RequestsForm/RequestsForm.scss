@@ -3,19 +3,37 @@
 .requests-form {
   margin: 8px;
 
-  .request-form {
-    width: calc(100% - 5rem);
+  .active {
+    .collapsible-header {
+      background-color: $secondary-color;
+      color: $light-text;
+      border-color: $secondary-color;
+    }
   }
 
-  .delete-request {
-    margin: 4.8rem 0 0 1.3rem;
+  .collapsible-header {
+    &:hover {
+      background-color: $secondary-color;
+      color: $light-text;
+      border-color: $secondary-color;
+    }
   }
 
-  .disable-switch {
-    margin-bottom: 45px;
+  .collapsible-body {
+    .request-form {
+      width: calc(100% - 5rem);
+    }
 
-    .label {
-      margin-right: 15px;
+    .delete-request {
+      margin: 4.8rem 0 0 1.3rem;
+    }
+
+    .disable-switch {
+      margin-bottom: 45px;
+
+      .label {
+        margin-right: 15px;
+      }
     }
   }
 }
