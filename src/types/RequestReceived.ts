@@ -1,12 +1,13 @@
 import Request from './Request';
-import Notifications from './Notifications';
+import Settings from './Settings';
 import Transaction from './Transaction';
 
 type RequestReceived = {
     request: Request,
-    notifications: Notifications,
+    settings: Settings,
     transaction: Transaction,
-    version: string
+    message: string,
+    pending: boolean,
 }
 
 export default RequestReceived;

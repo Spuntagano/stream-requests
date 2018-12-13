@@ -1,0 +1,45 @@
+@import '../../sass/global';
+
+.card {
+  overflow-y: auto;
+
+  .card-content {
+    padding-top: 16px;
+
+    .card-title {
+      margin-bottom: 0;
+    }
+
+    .card-sub-title {
+      margin-bottom: 8px;
+      display: block;
+      color: $secondary-color;
+    }
+
+    .card-close {
+      float: right;
+      cursor: pointer;
+      color: lighten(gray, 10%);
+      transition: color ease-in-out 0.15s;
+
+      &:hover {
+        color: darken(gray, 10%);
+      }
+    }
+  }
+
+  .card-action {
+    line-height: 2.5;
+
+    .secondary-action {
+      margin-right: 0!important;
+      cursor: pointer;
+    }
+  }
+}
+
+.dark-theme {
+  .card {
+    background-color: $dark-background;
+  }
+}

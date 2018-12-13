@@ -1,0 +1,41 @@
+@import '../../../sass/global';
+
+.active {
+  .collapsible-header {
+    background-color: $secondary-color;
+    color: $light-text;
+    border-color: $secondary-color;
+  }
+}
+
+.collapsible-header {
+  &:hover {
+    background-color: $secondary-color;
+    color: $light-text;
+    border-color: $secondary-color;
+  }
+}
+
+.dark-theme {
+  .collapsible {
+    border-color: $dark-border-color;
+
+    .collapsible-header {
+      border-color: $dark-border-color;
+    }
+
+    .collapsible-body {
+      border-color: $dark-border-color;
+    }
+  }
+
+  .request-form {
+    input, textarea {
+      color: $light-text;
+    }
+
+    label {
+      color: $sub-light-text;
+    }
+  }
+}

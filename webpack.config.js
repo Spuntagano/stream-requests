@@ -29,7 +29,13 @@ module.exports = (_env, argv) => {
 
   // edit webpack plugins here!
   let plugins = [
-    // new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+      webpackDevServerConfigs: JSON.stringify({
+        "notifierURL":"http://localhost:3005",
+        "relayURL":"https://docker.dev:3002"
+      })
+    })
   ];
 
   for (name in entryPoints) {
@@ -103,7 +109,6 @@ module.exports = (_env, argv) => {
       headers: {
         'Access-Control-Allow-Origin': '*'
       },
-      disableHostCheck: true,
       port: 8080
     }
   }

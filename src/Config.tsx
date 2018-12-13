@@ -1,10 +1,13 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import ConfigPage from './components/ConfigPage/ConfigPage';
+import Config from './components/Config/Config';
+import App from './components/App';
 import 'materialize-css/dist/js/materialize';
 import 'materialize-loader';
 
 ReactDOM.render(
-    <ConfigPage/>,
+    <App>
+        <Config />
+    </App>,
     document.getElementById('root')
 );

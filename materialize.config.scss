@@ -5,7 +5,6 @@
 $secondary-color: color("light-blue", "base") !default;
 $link-color: $secondary-color;
 
-$card-bg-color: transparent !default;
 $card-link-color: $secondary-color;
 
 $h1-fontsize: 3rem !default;
@@ -20,4 +19,4 @@ $switch-unchecked-lever-bg: #dad8de !default;
 
 $collection-bg-color: transparent !default;
 $collection-border-color: #dad8de !default;
-$collection-hover-bg-color: $secondary-color;
+$collection-hover-bg-color: transparent !default;

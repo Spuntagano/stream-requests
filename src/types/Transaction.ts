@@ -4,7 +4,7 @@ type transaction = {
     displayName: string,
     initiator: string,
     product: Product,
-    transactionID: string,
+    transactionId: string,
     transactionReceipt?: string,
     topic?: string,
     expires?: string,

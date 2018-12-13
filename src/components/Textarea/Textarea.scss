@@ -1,0 +1,13 @@
+@import '../../sass/global';
+
+.dark-theme{
+  .input-field {
+    input, textarea {
+      color: $light-text;
+    }
+
+    label {
+      color: $sub-light-text;
+    }
+  }
+}

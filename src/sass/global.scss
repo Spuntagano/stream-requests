@@ -2,10 +2,12 @@ $dark-text: #212121; //grey darken-4
 $light-text: #fff;
 $sub-light-text: #bdbdbd; //grey lighten-2
 $hover-text-color: #fff;
-
-
 $dark-background: #19171c;
-
 $secondary-color: #03a9f4; //light-blue
-
 $dark-border-color: hsla(0,0%,100%,.05);
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}

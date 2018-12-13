@@ -1,0 +1,25 @@
+@import '../../../sass/global';
+
+.collection-header {
+  color: #fff;
+  font-size: 18px;
+  background-color: $secondary-color!important;
+  border-bottom: none!important;
+
+  i {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    cursor: pointer;
+  }
+}
+
+.dark-theme {
+  .collection-header {
+    border-color: $dark-border-color;
+  }
+}
+
+.material-tooltip {
+  line-height: 1.3;
+}
