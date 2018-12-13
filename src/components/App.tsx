@@ -1,5 +1,4 @@
 import * as React from 'react'
-import * as jwt from "jsonwebtoken";
 import Authentication from '../lib/Authentication/Authentication'
 import Requests from '../types/Requests';
 import Products from '../types/Products';
@@ -41,8 +40,10 @@ export default class App extends React.Component {
             requests: {},
             products: {},
             settings: {},
-            // @ts-ignore
-            configs: webpackDevServerConfigs || {}
+            configs: {
+                notifierURL: '',
+                relayURL: ''
+            }
         }
     }
 
