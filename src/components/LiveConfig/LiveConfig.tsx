@@ -10,7 +10,6 @@ import Configs from '../../types/Configs';
 import Collection from "../Collection/Collection";
 import './LiveConfig.scss';
 import CollectionItem from '../Collection/CollectionItem/CollectionItem';
-import * as jwt from 'jsonwebtoken';
 
 type State = {
     requestsReceived: Array<RequestReceived>,
@@ -75,25 +74,23 @@ export default class LiveConfig extends React.Component {
             this.twitch.listen('broadcast', (target: string, contentType: string, body: any) => {
                 if (contentType === 'application/json') {
                     const json = JSON.parse(body);
-                    if (json.transactionId) {
-                        this.state.requestsReceived.forEach((requestReceived, index) => {
-                            if (json.transactionId === requestReceived.transaction.transactionId && requestReceived.message === null) {
-                                this.setState((prevState: State) => {
-                                    let newRequestsReceived: Array<RequestReceived> = [...prevState.requestsReceived];
-                                    newRequestsReceived[index].message = json.message;
-                                    newRequestsReceived[index].pending = false;
+                    this.state.requestsReceived.forEach((requestReceived, index) => {
+                        if (json.transactionId === requestReceived.transaction.transactionId && json.userId === requestReceived.transaction.userId && requestReceived.message === null) {
+                            this.setState((prevState: State) => {
+                                let newRequestsReceived: Array<RequestReceived> = [...prevState.requestsReceived];
+                                newRequestsReceived[index].message = json.message;
+                                newRequestsReceived[index].pending = false;
 
-                                    authentication.makeCall(`${configs.relayURL}/transaction`, 'POST', {
-                                        requestReceived: newRequestsReceived[index]
-                                    });
-
-                                    return {
-                                       requestsReceived: newRequestsReceived
-                                    }
+                                authentication.makeCall(`${configs.relayURL}/transaction`, 'POST', {
+                                    requestReceived: newRequestsReceived[index]
                                 });
-                            }
-                        });
-                    }
+
+                                return {
+                                   requestsReceived: newRequestsReceived
+                                }
+                            });
+                        }
+                    });
                 }
             })
         }

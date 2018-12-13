@@ -9,6 +9,7 @@ import Toast from '../lib/Toast/Toast';
 import Configs from '../types/Configs';
 import Loading from './Loading/Loading';
 import {ReactElement} from 'react';
+import configs from '../../configs';
 
 type State = {
     configured: boolean,
@@ -30,6 +31,9 @@ export default class App extends React.Component {
         super(props);
         this.authentication = new Authentication();
 
+        const url = new URL(window.location.href);
+        const state = url.searchParams.get('state');
+
         // @ts-ignore
         this.twitch = window.Twitch ? window.Twitch.ext : null;
         this.toast = new Toast();
@@ -40,10 +44,7 @@ export default class App extends React.Component {
             requests: {},
             products: {},
             settings: {},
-            configs: {
-                notifierURL: '',
-                relayURL: ''
-            }
+            configs: configs[state]
         }
     }
 
@@ -94,7 +95,6 @@ export default class App extends React.Component {
                         }
                     });
 
-
                     this.setState(() => {
                         return {
                             requests,
@@ -108,23 +108,6 @@ export default class App extends React.Component {
                         html: '<i class="material-icons">error_outline</i>Error while fetching infos',
                         classes: 'error'
                     });
-                }
-            });
-
-            this.twitch.configuration.onChanged(() => {
-                try {
-                    let configs: Configs = (this.twitch.configuration.global && this.twitch.configuration.global.content) ? JSON.parse(this.twitch.configuration.global.content).configs : {};
-                    if (this.twitch.configuration.developer && this.twitch.configuration.developer.content) {
-                        configs = JSON.parse(this.twitch.configuration.developer.content).configs;
-                    }
-
-                    this.setState(() => {
-                        return {
-                            configs
-                        }
-                    });
-                } catch (e) {
-                    this.toast.show({html: '<i class="material-icons">error_outline</i>Invalid configuration',classes: 'error'});
                 }
             });
 
