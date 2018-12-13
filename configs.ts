@@ -5,11 +5,11 @@ const configs:any = {
     },
     hosted_test: {
         notifierURL: 'http://stream-requests-notifier-staging.s3-website-us-west-2.amazonaws.com',
-        relayURL: 'https://104.248.117.94:8043'
+        relayURL: 'https://stream-requests.com:8043'
     },
     released: {
         notifierURL: 'http://stream-requests-notifier.s3-website-us-west-2.amazonaws.com',
-        relayURL: 'https://104.248.117.94'
+        relayURL: 'https://stream-requests.com'
     }
 };
 
