@@ -20,15 +20,15 @@ var s3 = new aws.S3({
 recursive(basePath+'public/assets', function (err, files) {
   // @ts-ignore
   files.forEach((file) => {
-    var relPath = file.split(basePath+'public/assets/')[1];
-    if (relPath === 'js/config.js') return;
+    var relPath = file.split(basePath+'public/')[1];
+    if (relPath === 'assets/js/config.js') return;
 
     upload(relPath, file);
   });
 });
 
 upload('index.html', basePath+'dist/notifier.html');
-upload('js/Notifier.bundle.js', basePath+'dist/Notifier.bundle.js');
+upload('Notifier.bundle.js', basePath+'dist/Notifier.bundle.js');
 
 // @ts-ignore
 function upload(relPath, file) {
