@@ -22,10 +22,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   echo "* To see or modify, run 'Keychain Access' app and look in the 'System' Folder"
   sudo security add-trusted-cert -d -p ssl -r trustRoot -k "/Library/Keychains/System.keychain" "${DIR}/${NAME}.crt"
 else
-  echo "* Please install and trust cert at conf/$NAME.crt"
+  echo "* Please install and trust cert at cert/$NAME.crt"
 fi
 cd "$DIR" 
-if [[ ! -d "${DIR}/../conf/" ]]; then
-  mkdir "${DIR}/../conf/"
+if [[ ! -d "${DIR}/../cert/" ]]; then
+  mkdir "${DIR}/../cert/"
 fi
-mv ${NAME}.{key,crt} "${DIR}/../conf/"
+mv ${NAME}.{key,crt} "${DIR}/../cert/"

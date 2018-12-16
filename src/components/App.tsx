@@ -32,7 +32,7 @@ export default class App extends React.Component {
         this.authentication = new Authentication();
 
         const url = new URL(window.location.href);
-        const state = url.searchParams.get('state');
+        const state = url.searchParams.get('state') || 'released';
 
         // @ts-ignore
         this.twitch = window.Twitch ? window.Twitch.ext : null;

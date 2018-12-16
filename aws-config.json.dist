@@ -1,0 +1,7 @@
+{
+  "accessKeyId": "",
+  "secretAccessKey": "",
+  "bucketName": "stream-requests-notifier",
+  "bucketNameStaging": "stream-requests-notifier-staging",
+  "endpoint": "s3.us-west-2.amazonaws.com"
+}

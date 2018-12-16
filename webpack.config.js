@@ -23,6 +23,11 @@ module.exports = (_env, argv) => {
       outputHtml: "config.html",
       build: true
     },
+    Notifier: {
+      path: ["./src/Notifier.tsx"],
+      outputHtml: "notifier.html",
+      build: true
+    },
   };
 
   let entry = {};
@@ -97,8 +102,8 @@ module.exports = (_env, argv) => {
       contentBase: path.join(__dirname, 'public'),
       host: argv.devrig ? 'localhost.rig.twitch.tv' : 'localhost',
       https: {
-        key: fs.readFileSync(path.resolve(__dirname, 'conf/server.key')),
-        cert: fs.readFileSync(path.resolve(__dirname, 'conf/server.crt'))
+        key: fs.readFileSync(path.resolve(__dirname, 'cert/server.key')),
+        cert: fs.readFileSync(path.resolve(__dirname, 'cert/server.crt'))
       },
       headers: {
         'Access-Control-Allow-Origin': '*'

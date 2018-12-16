@@ -1,0 +1,3 @@
+config = {
+  WS_URL: 'wss://stream-requests.com:3004'
+};

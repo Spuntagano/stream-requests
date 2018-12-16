@@ -1,5 +1,5 @@
 # Configuration
-conf/*
+cert/*
 
 # Junk
 .DS_Store
@@ -68,3 +68,4 @@ typings/
 dist/
 "node_modules"
 .idea
+aws-config.json
