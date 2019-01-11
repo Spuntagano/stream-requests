@@ -1,6 +1,6 @@
 const configs:any = {
     testing: {
-        notifierURL: 'http://localhost:3005',
+        notifierURL: 'https://localhost.rig.twitch.tv:8080/notifier.html',
         relayURL: 'https://docker.dev:3002'
     },
     hosted_test: {

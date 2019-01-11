@@ -3,7 +3,8 @@ import './CollapsibleItem.scss'
 
 type Props = {
     title: string,
-    children: Array<JSX.Element>
+    children: Array<JSX.Element>|JSX.Element,
+    className?: string
 };
 
 export default class Config extends React.Component {
@@ -14,10 +15,10 @@ export default class Config extends React.Component {
     }
 
     render() {
-        const {title, children} = this.props;
+        const {title, children, className} = this.props;
 
         return (
-            <li>
+            <li className={className}>
                 <div className="collapsible-header">{title}</div>
                 <div className="collapsible-body">{children}</div>
             </li>

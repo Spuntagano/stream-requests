@@ -124,9 +124,9 @@ export default class Authentication{
                             reject(response);
                         }
                     })
-                    .catch(e => reject(e))
+                    .catch(e => reject(e));
             }else{
-                reject('Unauthorized')
+                reject('Unauthorized');
             }
         })
     }

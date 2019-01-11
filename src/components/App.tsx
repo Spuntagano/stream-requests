@@ -74,6 +74,7 @@ export default class App extends React.Component {
             this.twitch.onAuthorized(async (auth: Auth) => {
                 try {
                     this.authentication.setToken(auth.token, auth.userId, auth.channelId, auth.clientId);
+                    console.log(auth);
 
                     let promises: any = await Promise.all([
                         this.authentication.makeCall(`${this.state.configs.relayURL}/request`),
@@ -84,6 +85,24 @@ export default class App extends React.Component {
                     let requests = (await promises[0].json()).requests;
                     let products = (await promises[1].json()).products;
                     let settings = (await promises[2].json()).settings;
+
+                    let empty = true;
+                    Object.keys(products).forEach((price) => {
+                        requests[price] = requests[price] || [];
+
+                        if (requests[price].length) {
+                            empty = false;
+                        }
+                    });
+
+                    if (empty) {
+                        try {
+                            requests = JSON.parse(this.twitch.configuration.broadcaster.content).requests;
+                            settings.flushConfigs = true;
+                        } catch (e) {
+                            requests = {};
+                        }
+                    }
 
                     Object.keys(products).forEach((price) => {
                         if (!requests[price]) {

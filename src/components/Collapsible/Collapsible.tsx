@@ -2,7 +2,7 @@ import * as React from 'react'
 
 type Props = {
     onOpenStart: () => void,
-    children: Array<JSX.Element>
+    children: Array<JSX.Element>|JSX.Element
 };
 
 export default class Collapsible extends React.Component {

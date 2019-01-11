@@ -8,7 +8,7 @@ type Props = {
     className: string
     onClose: () => void,
     mainAction: Action,
-    secondaryAction: Action,
+    secondaryAction?: Action,
     children: Array<JSX.Element>
 }
 

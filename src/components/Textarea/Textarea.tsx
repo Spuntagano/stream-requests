@@ -6,6 +6,7 @@ type Props = {
     value: string,
     label: string,
     id: string,
+    maxLength?: number,
     onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void,
 }
 
@@ -17,11 +18,11 @@ export default class Textarea extends React.Component {
     }
 
     render() {
-        const {value, label, id, onChange} = this.props;
+        const {value, label, id, onChange, maxLength} = this.props;
 
         return (
             <div className="input-field">
-                <textarea id={id} className="materialize-textarea" value={value} onChange={onChange}/>
+                <textarea id={id} className="materialize-textarea" value={value} onChange={onChange} maxLength={maxLength} />
                 <label className={(value) ? 'active' : ''} htmlFor={id}>{label}</label>
             </div>
         )

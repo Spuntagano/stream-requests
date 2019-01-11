@@ -166,7 +166,7 @@ export default class Panel extends React.Component {
                           onClick: this.twitch.bits.showBitsBalance
                       }}>
                         <p className="description">{requests[this.state.price][this.state.index].description}</p>
-                        <Textarea value={this.state.message} label="Message" id="request-message" onChange={this.onMessageChange()} />
+                        <Textarea value={this.state.message} label="Message" id="request-message" onChange={this.onMessageChange()} maxLength={150} />
                     </Card>}
                 </div>
             </div>

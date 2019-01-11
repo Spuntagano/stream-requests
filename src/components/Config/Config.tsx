@@ -99,12 +99,13 @@ export default class Config extends React.Component {
     }
 
     async updateConfiguration() {
-        const {authentication, configs} = this.props;
+        const {authentication, configs, products} = this.props;
 
         let requests: Requests = {};
-        Object.keys(this.state.requests).forEach((price) => {
-            requests[price] = this.state.requests[price].filter((request) => {
-                return !!(request.title.length || request.description.length);
+        Object.keys(products).forEach((price) => {
+            products[price].forEach((p, index) => {
+                requests[price] = requests[price] || [];
+                requests[price][index] = this.state.requests[price][index] || {title: '', description: '', active: false}
             });
         });
 
@@ -174,16 +175,10 @@ export default class Config extends React.Component {
             settings: this.state.settings,
         };
 
-        authentication.makeCall(`${configs.relayURL}/transaction`, 'POST', {
+        authentication.makeCall(`${configs.relayURL}/notify`, 'POST', {
             requestReceived,
         }).then(() => {
-            authentication.makeCall(`${configs.relayURL}/transaction`, 'POST', {
-                requestReceived,
-            }).then(() => {
-                this.toast.show({html: '<i class="material-icons">done</i>Notification sent', classes: 'success'});
-            }).catch(() => {
-                this.toast.show({html: '<i class="material-icons">error_outline</i>Error sending notification!', classes: 'error'});
-            });
+            this.toast.show({html: '<i class="material-icons">done</i>Notification sent', classes: 'success'});
         }).catch(() => {
             this.toast.show({html: '<i class="material-icons">error_outline</i>Error sending notification!', classes: 'error'});
         });
@@ -231,6 +226,7 @@ export default class Config extends React.Component {
 
         return Object.keys(products).map((price: string) => {
             let counter = 0;
+            this.state.requests[price] = this.state.requests[price] || [];
             this.state.requests[price].forEach((request) => {
                 if (request.title || request.description) {
                     counter++;
@@ -257,7 +253,7 @@ export default class Config extends React.Component {
 
                 <h2>Notifications settings</h2>
                 <div className="notification-box">
-                    <InputField className="notification-box-url" inputRef={(el) => this.notificationBoxUrl = el} value={`${configs.notifierURL}/#/${authentication.getChannelId()}`} label="Notification box URL (Add as browser source in OBS)" id="notification-box-url" readOnly />
+                    <InputField className="notification-box-url" inputRef={(el) => this.notificationBoxUrl = el} value={`${configs.notifierURL}#/${authentication.getChannelId()}`} label="Notification box URL (Add as browser source in OBS)" id="notification-box-url" readOnly />
 
                     <a className="copy-notification-box-url" onClick={this.onCopyNotificationBoxUrl()}><i className="material-icons">insert_link</i> Copy link</a>
                     <button className="btn waves-effect waves-light" onClick={this.onTestNotifier()}>Test notification</button>
@@ -267,6 +263,7 @@ export default class Config extends React.Component {
                     <Switch checked={this.state.settings.showImage} label="Show image" onChange={this.onUpdateSettings('showImage')}/>
                     <Switch checked={this.state.settings.playSound} label="Play sound" onChange={this.onUpdateSettings('playSound')}/>
                     <Switch checked={this.state.settings.sendChat} label="Send to chat" onChange={this.onUpdateSettings('sendChat')}/>
+                    <Switch checked={this.state.settings.profanityFilter} label="Profanity filter" onChange={this.onUpdateSettings('profanityFilter')}/>
                 </div>
                 <div>
                     <button className="btn waves-effect waves-light" onClick={this.onUpdateConfiguration()}>Save settings</button>
