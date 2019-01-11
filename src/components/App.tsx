@@ -74,7 +74,6 @@ export default class App extends React.Component {
             this.twitch.onAuthorized(async (auth: Auth) => {
                 try {
                     this.authentication.setToken(auth.token, auth.userId, auth.channelId, auth.clientId);
-                    console.log(auth);
 
                     let promises: any = await Promise.all([
                         this.authentication.makeCall(`${this.state.configs.relayURL}/request`),
