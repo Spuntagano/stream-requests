@@ -73,24 +73,28 @@ export default class LiveConfig extends React.Component {
 
             this.twitch.listen('broadcast', (target: string, contentType: string, body: any) => {
                 if (contentType === 'application/json') {
-                    const json = JSON.parse(body);
-                    this.state.requestsReceived.forEach((requestReceived, index) => {
-                        if (json.transactionId === requestReceived.transaction.transactionId && json.userId === requestReceived.transaction.userId && requestReceived.message === null) {
-                            this.setState((prevState: State) => {
-                                let newRequestsReceived: Array<RequestReceived> = [...prevState.requestsReceived];
-                                newRequestsReceived[index].message = json.message;
-                                newRequestsReceived[index].pending = false;
+                    try {
+                        const json = JSON.parse(body);
+                        this.state.requestsReceived.forEach((requestReceived, index) => {
+                            if (json.transactionId === requestReceived.transaction.transactionId && json.userId === requestReceived.transaction.userId && requestReceived.message === null) {
+                                this.setState((prevState: State) => {
+                                    let newRequestsReceived: Array<RequestReceived> = [...prevState.requestsReceived];
+                                    newRequestsReceived[index].message = json.message;
+                                    newRequestsReceived[index].pending = false;
 
-                                authentication.makeCall(`${configs.relayURL}/transaction`, 'POST', {
-                                    requestReceived: newRequestsReceived[index]
+                                    authentication.makeCall(`${configs.relayURL}/transaction`, 'POST', {
+                                        requestReceived: newRequestsReceived[index]
+                                    });
+
+                                    return {
+                                        requestsReceived: newRequestsReceived
+                                    }
                                 });
-
-                                return {
-                                   requestsReceived: newRequestsReceived
-                                }
-                            });
-                        }
-                    });
+                            }
+                        });
+                    } catch(e) {
+                        console.error('misformed json received');
+                    }
                 }
             })
         }

@@ -131,14 +131,18 @@ export default class App extends React.Component {
 
             this.twitch.listen('broadcast', (target: string, contentType: string, body: any) => {
                 if (contentType ==='application/json') {
-                    const json = JSON.parse(body);
-                    if (json.requests) {
-                        this.setState(() => {
-                            return {
-                                requests: json.requests,
-                                settings: json.settings
-                            }
-                        });
+                    try {
+                        const json = JSON.parse(body);
+                        if (json.requests) {
+                            this.setState(() => {
+                                return {
+                                    requests: json.requests,
+                                    settings: json.settings
+                                }
+                            });
+                        }
+                    } catch(e) {
+                        console.error('misformed json received');
                     }
                 }
             });
