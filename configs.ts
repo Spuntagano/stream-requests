@@ -7,6 +7,10 @@ const configs:any = {
         notifierURL: 'http://stream-requests-notifier-staging.s3-website-us-west-2.amazonaws.com',
         relayURL: 'https://api.stream-requests.com:8043'
     },
+    in_review: {
+        notifierURL: 'http://stream-requests-notifier-staging.s3-website-us-west-2.amazonaws.com',
+        relayURL: 'https://api.stream-requests.com:8043'
+    },
     released: {
         notifierURL: 'http://stream-requests-notifier.s3-website-us-west-2.amazonaws.com',
         relayURL: 'https://stream-requests.com'
