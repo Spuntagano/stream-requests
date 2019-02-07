@@ -147,7 +147,7 @@ export default class Config extends React.Component {
         });
     }
 
-    testNotifier() {
+    async testNotifier() {
         const {configs, authentication} = this.props;
 
         let requestReceived: RequestReceived = {
@@ -171,17 +171,17 @@ export default class Config extends React.Component {
                 userId: "0",
             },
             message: 'Test message',
-            pending: false,
             settings: this.state.settings,
         };
 
-        authentication.makeCall(`${configs.relayURL}/notify`, 'POST', {
-            requestReceived,
-        }).then(() => {
+        try {
+            await authentication.makeCall(`${configs.relayURL}/notify`, 'POST', {
+                requestReceived,
+            });
             this.toast.show({html: '<i class="material-icons">done</i>Notification sent', classes: 'success'});
-        }).catch(() => {
+        } catch (e) {
             this.toast.show({html: '<i class="material-icons">error_outline</i>Error sending notification!', classes: 'error'});
-        });
+        }
     }
 
     copyNotificationBoxUrl() {

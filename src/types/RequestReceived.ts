@@ -6,8 +6,7 @@ type RequestReceived = {
     request: Request,
     settings: Settings,
     transaction: Transaction,
-    message: string,
-    pending: boolean,
+    message: string
 }
 
 export default RequestReceived;

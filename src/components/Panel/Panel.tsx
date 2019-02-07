@@ -12,6 +12,7 @@ import {ChangeEvent} from 'react';
 import Textarea from '../Textarea/Textarea';
 import CollectionItem from '../Collection/CollectionItem/CollectionItem';
 import './Panel.scss';
+import Toast from '../../lib/Toast/Toast';
 
 type Props = {
     requests?: Requests,
@@ -30,6 +31,7 @@ type State = {
 
 export default class Panel extends React.Component {
     public twitch: any;
+    public toast: Toast;
     public props: Props;
     public state: State;
     public onPurchaseRequest: (sku: string) => (e: MouseEvent<HTMLAnchorElement>) => void;
@@ -41,6 +43,7 @@ export default class Panel extends React.Component {
         super(props);
         // @ts-ignore
         this.twitch = window.Twitch ? window.Twitch.ext : null;
+        this.toast = new Toast();
         this.twitch.bits.onTransactionComplete(this.transactionComplete.bind(this));
         this.onPurchaseRequest = (sku: string) => (e: MouseEvent<HTMLAnchorElement>) => this.purchaseRequest(e, sku);
         this.onShowRequest = (price: string, index: number) => (e: MouseEvent<HTMLAnchorElement>) => this.showRequest(e, price, index);
@@ -79,15 +82,20 @@ export default class Panel extends React.Component {
     }
 
     transactionComplete(transaction: Transaction) {
-        const {authentication, configs} = this.props;
-        const message = this.state.message;
+        const {authentication, configs, requests, settings} = this.props;
 
-        setTimeout(() => {
-            authentication.makeCall(`${configs.relayURL}/pubsub`, 'POST', {
-                transactionId: transaction.transactionId,
-                message
+        try {
+            authentication.makeCall(`${configs.relayURL}/transaction`, 'POST', {
+                requestReceived: {
+                    transaction: transaction,
+                    request: requests[this.state.price][this.state.index],
+                    settings: settings,
+                    message: this.state.message
+                }
             });
-        }, 2000);
+        } catch (e) {
+            this.toast.show({html: '<i class="material-icons">error_outline</i>Error sending notification!', classes: 'error'});
+        }
 
         this.showRequests();
     }
