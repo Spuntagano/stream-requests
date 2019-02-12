@@ -13,7 +13,7 @@ const configs:any = {
     },
     released: {
         notifierURL: 'http://stream-requests-notifier.s3-website-us-west-2.amazonaws.com',
-        relayURL: 'https://stream-requests.com'
+        relayURL: 'https://api.stream-requests.com'
     }
 };
 
