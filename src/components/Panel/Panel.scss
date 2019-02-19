@@ -7,11 +7,13 @@
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: -10;
-  background-color: #fff;
+
+  .collection {
+    background-color: #fff;
+  }
 
   .request-container {
-    position: fixed;
+    position: absolute;
     right: 0;
     bottom: 0;
     left: 0;
@@ -42,7 +44,10 @@
 .dark-theme {
   .panel {
     background-color: $dark-background;
-    border: 1px solid $dark-border-color;
     color: $light-text;
+
+    .collection {
+      background-color: $dark-background;
+    }
   }
 }

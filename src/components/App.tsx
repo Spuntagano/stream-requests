@@ -21,13 +21,19 @@ type State = {
     configs: Configs
 }
 
+type Props = {
+    showLoading?: boolean,
+    children: Array<JSX.Element>|JSX.Element
+}
+
 export default class App extends React.Component {
     public authentication: Authentication;
     public twitch: any;
     public state: State;
+    public props: Props;
     public toast: Toast;
 
-    constructor(props: {}) {
+    constructor(props: Props) {
         super(props);
         this.authentication = new Authentication();
 
@@ -181,7 +187,7 @@ export default class App extends React.Component {
         return (
             <div className={`app ${(this.state.theme) === 'dark' ? 'dark-theme' : ''}`}>
                 {this.state.configured && this.state.isVisible && children}
-                {(!this.state.configured || !this.state.isVisible) && <Loading />}
+                {(!this.state.configured || !this.state.isVisible) && this.props.showLoading && <Loading />}
             </div>
         )
 

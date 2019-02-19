@@ -157,7 +157,7 @@ export default class Panel extends React.Component {
                     tooltip="Stream request is a new way to interact with the streamer. It allows viewers to exchange bits for requests listed below."
                     className="no-border"
                 >
-                    {this.renderCollectionItems()}
+                    {!this.state.showInfo && this.renderCollectionItems()}
                 </Collection>
                 <div className={`request-container scale-transition ${this.state.showInfo ? 'scale-in' : 'scale-out'}`}>
                     {this.state.showInfo && <Card

@@ -6,7 +6,7 @@ import 'materialize-css/dist/js/materialize';
 import 'materialize-loader';
 
 ReactDOM.render(
-    <App>
+    <App showLoading>
         <LiveConfig />
     </App>,
     document.getElementById("root")

@@ -1,13 +1,13 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import App from './components/App';
-import Panel from './components/Panel/Panel';
+import VideoComponent from './components/VideoComponent/VideoComponent';
 import 'materialize-css/dist/js/materialize';
 import 'materialize-loader';
 
 ReactDOM.render(
-    <App showLoading>
-        <Panel />
+    <App>
+        <VideoComponent />
     </App>,
     document.getElementById('root')
 );

@@ -23,6 +23,11 @@ module.exports = (_env, argv) => {
       outputHtml: "config.html",
       build: true
     },
+    VideoComponent: {
+      path: ["./src/VideoComponent.tsx", "materialize-loader!./materialize.config.js"],
+      outputHtml: "video_component.html",
+      build: true
+    },
     Notifier: {
       path: ["./src/Notifier.tsx"],
       outputHtml: "notifier.html",
