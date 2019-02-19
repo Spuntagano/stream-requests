@@ -4,15 +4,23 @@ const configs:any = {
         relayURL: 'https://docker.dev:3002'
     },
     hosted_test: {
-        notifierURL: 'http://stream-requests-notifier-staging.s3-website-us-west-2.amazonaws.com',
+        notifierURL: 'https://notifier-staging.stream-requests.com',
         relayURL: 'https://api.stream-requests.com:8043'
     },
     in_review: {
-        notifierURL: 'http://stream-requests-notifier-staging.s3-website-us-west-2.amazonaws.com',
+        notifierURL: 'https://notifier-staging.stream-requests.com',
+        relayURL: 'https://api.stream-requests.com:8043'
+    },
+    pending_action: {
+        notifierURL: 'https://notifier-staging.stream-requests.com',
+        relayURL: 'https://api.stream-requests.com:8043'
+    },
+    approved: {
+        notifierURL: 'https://notifier-staging.stream-requests.com',
         relayURL: 'https://api.stream-requests.com:8043'
     },
     released: {
-        notifierURL: 'http://stream-requests-notifier.s3-website-us-west-2.amazonaws.com',
+        notifierURL: 'https://notifier.stream-requests.com',
         relayURL: 'https://api.stream-requests.com'
     }
 };
