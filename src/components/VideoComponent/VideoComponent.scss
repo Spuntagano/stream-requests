@@ -16,7 +16,7 @@
   .logo-container {
     position: absolute;
     right: 30px;
-    bottom: 100px;
+    bottom: 30px;
     cursor: pointer;
     opacity: 0;
     transition: opacity 0.5s ease;
@@ -28,51 +28,21 @@
 
   .close {
     position: absolute;
-    right: 330px;
-    top: 107px;
+    right: 12px;
+    top: 12px;
     cursor: pointer;
-    color: #ececec;
-    background-color: rgba(0,0,0,0.3);
-    border-radius: 50%;
-    padding: 5px;
-    width: 35px;
-    height: 35px;
+    color: #fff;
     transition: color 0.3s ease;
-
-    &:hover {
-      color: #fff;
-    }
+    z-index: 10;
   }
 
   .panel-container {
-    position: absolute;
-    right: 0;
-    top: 100px;
-    bottom: 70px;
-    width: 320px;
-    overflow-y: auto;
+    .panel {
+      position: static;
 
-    .wrapper {
-      max-height: calc(100vh - 200px);
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-
-      .panel {
-        position: static;
-
-        .no-border {
-          border-bottom: none !important;
-        }
+      .no-border {
+        border-bottom: none !important;
       }
     }
-  }
-}
-
-.dark-theme {
-  .video-component {
-
   }
 }

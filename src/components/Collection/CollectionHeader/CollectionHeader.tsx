@@ -3,7 +3,8 @@ import './CollectionHeader.scss';
 
 type Props = {
     title: string,
-    tooltip: string
+    tooltip: string,
+    leftTooltip?: boolean
 }
 
 export default class CollectionHeader extends React.Component {
@@ -28,12 +29,14 @@ export default class CollectionHeader extends React.Component {
     }
 
     render() {
-        const {title, tooltip} = this.props;
+        const {title, tooltip, leftTooltip} = this.props;
 
         return (
             <div className="collection-header">
-                <div>{title}</div>
-                {tooltip && <i className="material-icons right tooltipped" data-name="bottom" data-tooltip={tooltip}>info_outline</i>}
+                <div>
+                    {title}
+                    {tooltip && <i className={`material-icons tooltip tooltipped ${(leftTooltip) ? 'left-tooltip' : ''}`} data-name="bottom" data-tooltip={tooltip}>info_outline</i>}
+                </div>
             </div>
         )
     }

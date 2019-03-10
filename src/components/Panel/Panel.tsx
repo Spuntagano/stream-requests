@@ -19,7 +19,8 @@ type Props = {
     products?: Products,
     settings?: Settings,
     configs?: Configs,
-    authentication?: Authentication
+    authentication?: Authentication,
+    leftTooltip?: boolean
 }
 
 type State = {
@@ -148,7 +149,7 @@ export default class Panel extends React.Component {
     }
 
     render() {
-        const {requests, products} = this.props;
+        const {requests, products, leftTooltip} = this.props;
 
         return (
             <div className="panel">
@@ -156,8 +157,11 @@ export default class Panel extends React.Component {
                     title="Stream Requests"
                     tooltip="Stream request is a new way to interact with the streamer. It allows viewers to exchange bits for requests listed below."
                     className="no-border"
+                    leftTooltip={leftTooltip}
                 >
-                    {!this.state.showInfo && this.renderCollectionItems()}
+                    {!this.state.showInfo && <div className="collection-items">
+                        {this.renderCollectionItems()}
+                    </div>}
                 </Collection>
                 <div className={`request-container scale-transition ${this.state.showInfo ? 'scale-in' : 'scale-out'}`}>
                     {this.state.showInfo && <Card

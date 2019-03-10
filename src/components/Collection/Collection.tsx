@@ -6,7 +6,8 @@ type Props = {
     title: string,
     children: JSX.Element|Array<JSX.Element>|Array<void>,
     tooltip?: string,
-    className?: string
+    className?: string,
+    leftTooltip?: boolean
 }
 
 export default class Collection extends React.Component {
@@ -17,11 +18,11 @@ export default class Collection extends React.Component {
     }
 
     render() {
-        const {title, tooltip, className, children} = this.props;
+        const {title, tooltip, className, children, leftTooltip} = this.props;
 
         return (
             <div className={`collection with-header ${className}`}>
-                <CollectionHeader title={title} tooltip={tooltip} />
+                <CollectionHeader title={title} tooltip={tooltip} leftTooltip={leftTooltip} />
                 {children}
             </div>
         )

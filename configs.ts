@@ -1,7 +1,7 @@
 const configs:any = {
     testing: {
         notifierURL: 'https://localhost.rig.twitch.tv:8080/notifier.html',
-        relayURL: 'https://docker.dev:3002'
+        relayURL: 'https://localhost:3002'
     },
     hosted_test: {
         notifierURL: 'https://notifier-staging.stream-requests.com',

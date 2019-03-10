@@ -6,11 +6,16 @@
   background-color: $secondary-color!important;
   border-bottom: none!important;
 
-  i {
-    position: absolute;
-    top: 12px;
-    right: 18px;
+  .tooltip {
     cursor: pointer;
+    float: right;
+    position: relative;
+    top: 2px;
+  }
+
+  .tooltip.left-tooltip {
+    float: left;
+    margin-right: 7px!important;
   }
 }
 

@@ -60,9 +60,13 @@ export default class VideoComponent extends React.Component {
                 </div>}
 
                 {this.state.show && <div className="panel-container">
-                    <div className="wrapper">
-                        <Panel requests={requests} products={products} settings={settings} configs={configs} authentication={authentication} />
-                    </div>
+                    <Panel requests={requests}
+                        products={products}
+                        settings={settings}
+                        configs={configs}
+                        authentication={authentication}
+                        leftTooltip
+                    />
                 </div>}
             </div>
         )
